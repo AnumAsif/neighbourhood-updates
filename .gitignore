@@ -1,0 +1,9 @@
+virtual/
+
+.vscode/
+
+.env
+
+start.sh
+
+*pyc
