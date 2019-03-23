@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'pyuploadcare.dj',
     'django.contrib.staticfiles',
     'myneighbourhood.apps.MyneighbourhoodConfig',
     'bootstrap3',
@@ -103,7 +104,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+UPLOADCARE = {
+    'pub_key': '2d094b94977b79c1f7f6',
+    'secret': '7bca135d5161f6b32056',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
