@@ -30,15 +30,18 @@ class Neighbourhood(models.Model):
     def save_neighbourhood(self):
         self.save()
 
-    def delete_neighbourhood(self, neighbourhood_id):
+    
+    @classmethod
+    def delete_neighbourhood(cls, neighbourhood_id):
         hood = Neighbourhood.objects.filter(id=neighbourhood_id).first()
         hood.delete()
-
-    def find_neighbourhood(self,neighbourhood_id):
+    @classmethod
+    def find_neighbourhood(cls,neighbourhood_id):
         hood = Neighbourhood.objects.filter(id=neighbourhood_id).first()
         return hood
 
-    def update_occuppants(self, neighbourhood_id, occupants):
+    @classmethod
+    def update_occupants(cls, neighbourhood_id, occupants):
         hood = Neighbourhood.objects.filter(id=neighbourhood_id).first()
         hood.occupants_count=occupants
         hood.save() 
@@ -81,7 +84,7 @@ class Profile(models.Model):
 class Business(models.Model):
     name=models.CharField(max_length=50)
     owner=models.ForeignKey(User,on_delete=models.CASCADE)
-    neighbourhood=models.ForeignKey('Business',on_delete=models.CASCADE)
+    neighbourhood=models.ForeignKey('Neighbourhood',on_delete=models.CASCADE)
     email=models.EmailField(blank=True)
     
     def __str__(self):
@@ -110,5 +113,5 @@ class Business(models.Model):
 
 
            
-class Category(models.Model):
-    name=models.CharField(max_length=50)    
+# class Category(models.Model):
+#     name=models.CharField(max_length=50)    
