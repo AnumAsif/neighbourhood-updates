@@ -2,7 +2,7 @@
 #### This is a web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different people to meeting announcements or even alerts, 22/03/2019.
 #### By **ANUM ASIF**
 ## Description
-
+This application has been developed for a busy person to have all the information about his neighbourhood in his hand. A user can create an account and sign into it. User can create it's own neighbourhood. User can post on it's neighbourhood's dashboard. User can see posts of other users and all the information related to his neighbourhood.
 ## Specifications
 ### User
 | Behavior            | Input                         | Output                        | 
