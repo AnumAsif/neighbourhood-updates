@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="profile-image">
+                            {% if user.profile.profile_pic %}
+                            <img src="{{user.profile.profile_pic.cdn_url}}}" alt="profile-pic"> 
+                            {% else %}
+                            <img src="/static/images/defaultimg.jpeg" alt="profile-pic">
+                            {% endif %}
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-6 profile-body">
+                        
+                        {% if user.profile %}
+                        <h1>{{user.profile.first_name}} {{user.profile.last_name}}  {% if user == current_user %}
+                                <button class="btn btn-secondary"><a href="{% url 'edit_profile' %}"><img src="https://img.icons8.com/small/1zs6/000000/gear.png"></a></button>  
+                                {% endif %}</h1>
+                        <p><span>Phone No:</span> {{user.profile.contact_no}}</p>
+                        <p><span>Email:</span> {{user.email}}</p>
+                        <p><span>Neighbourhood:</span> {{user.profile.neighbourhood}}</p>
+                        <p><span>Location:</span> {{user.profile.neighbourhood.location}}</p>                    
+                        <p><span>Bio:</span> {{user.profile.bio}}</p>
+                        {% else %}
+                        <h1>{{user.username}} 
+                            {% if user == current_user %}
+                            <button class="btn btn-secondary"><a href="{% url 'edit_profile' %}"><img src="https://img.icons8.com/small/1zs6/000000/gear.png"></a></button>  
+                            {% endif %}
+                        </h1>
+                        {% endif %} 
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="text-align:center;">
+            {% comment %} {% for project in projects %} {% endcomment %}
+            <div class="card col-md-3">
+                <div class="card-image">
+                    {% comment %} <img src="{{ project.image.cdn_url }}" alt="ProjectImage" /> {% endcomment %}
+                </div>
+                <div class="card-body">
+                    <div class="card-date">
+                        <time>
+                            {% comment %} {{project.post_date|timesince}}     {% endcomment %}
+                        </time>
+                    </div>
+                    <div class="card-title">
+                        <h3>
+                        {% comment %} {{project.title}} {% endcomment %}
+                        </h3>
+                    </div>
+                    <div class="card-exceprt">
+                        {% comment %} <p>{{project.description}}</p> {% endcomment %}
+                        {% comment %} <p style="font-weight:bold;">Languages Used</p> {% endcomment %}
+                        {% comment %} <p>{% for language in project.languages.all  %} {% endcomment %}
+                            {% comment %} &#9733;{{language.title}} {% endcomment %}
+                        {% comment %} {% endfor %} </p> {% endcomment %}
+                        
+                        {% comment %} <p><a href="{{project.link}}" style="font-size:15px; color: #777; font-family: 'Playfair Display', serif;">{{project.link}}</a></p> {% endcomment %}
+                    </div>
+    
+                    <div class="card-exert" style="margin-bottom:0; "><button class="btn btn-primary" ><a href="">Rate It</a></button></div>
+                    </div>
+            </div>  
+        
+        </div>
+        <div class="col-md-1"></div>
+    </div> -->
+</div>
+{% endblock  %}
