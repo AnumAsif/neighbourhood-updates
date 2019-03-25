@@ -54,4 +54,50 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def home(request):
-    return render(request, 'home.html')
+    user=request.user
+    hoods=Neighbourhood.objects.all()
+    return render(request, 'home.html',{'current_user':user, 'hoods':hoods})
+
+@login_required(login_url='/login')
+def profile(request, username):
+    current_user=request.user
+    user=User.objects.get(username=username)
+    return render(request,'profile.html',{'current_user':current_user,'user':user})    
+
+@login_required(login_url='/login')
+def edit_profile(request):
+    user=request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            edit = form.save(commit=False)
+            edit.user = user
+            edit.save()
+            return redirect('profile', username=user.username)
+    else:
+        form = ProfileForm()
+
+    return render(request, 'edit_profile.html', {'form':form, 'current_user':user})
+
+@login_required(login_url='/login')
+def add_neighbourhood(request):
+    user=request.user
+    if request.method == 'POST':
+        form = HoodForm(request.POST)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.admin = user
+            hood.save()
+            return redirect('home')
+    else:
+        form = HoodForm()
+
+    return render(request, 'add_neighbourhood.html', {'form':form, 'current_user':user})
+
+@login_required(login_url='/login')
+def hood_details(request, hood_id):
+    hood=Neighbourhood.find_neighbourhood(hood_id)
+    occupants=Profile.objects.filter(neighbourhood=hood)
+    businesses=Business.objects.filter(neighbourhood=hood)
+    posts=Post.objects.filter(neighbourhood=hood)
+    return render(request, 'hood_details.html',{'hood':hood,'occupants':occupants, 'businesses':businesses,'posts':posts})

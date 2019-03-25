@@ -3,11 +3,9 @@
 
 {% block content %}
 <div class="container">
-    <div class="row sign-in">
-        <div class="col-md-4">
-           
-        </div>
-        <div class="col-md-4 form">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 signin-page">
             {% if form.errors %}
             <p class="small">Password or Username is incorrect</p>
             {% endif %}
@@ -28,6 +26,7 @@
                 <p>Don't have an account? <a href="{% url 'signup' %}">Sign-Up</a></p>
             </div>
         </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 {% endblock %}

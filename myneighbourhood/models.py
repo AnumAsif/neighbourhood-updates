@@ -57,7 +57,7 @@ class Profile(models.Model):
     profile_pic=ImageField(blank=True, manual_crop='200x200')
     bio=models.TextField(max_length=200,null=True)
     contact_no=models.IntegerField(null=True)
-    email=models.EmailField(null=True)
+  
     neighbourhood=models.ForeignKey('Neighbourhood', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -80,15 +80,34 @@ class Profile(models.Model):
     def filter_by_id(cls, id): 
         profile=Profile.objects.filter(user=id).first()
         return profile    
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+
+    def save_category(self):
+        self.save()
+
+    def delete_category(self):
+        self.delete()
+
+    def __str__(self):
+        return self.name           
+
+    class Meta:
+      verbose_name_plural = "Categories"
 
 class Business(models.Model):
     name=models.CharField(max_length=50)
     owner=models.ForeignKey(User,on_delete=models.CASCADE)
     neighbourhood=models.ForeignKey('Neighbourhood',on_delete=models.CASCADE)
     email=models.EmailField(blank=True)
-    
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    phone=models.IntegerField(null=True)
     def __str__(self):
         return self.title
+
+
+    class Meta:
+      verbose_name_plural = "Businesses"
 
     def save_business(self):
         self.save()    
@@ -116,18 +135,35 @@ class Post(models.Model):
     user = models.ForeignKey(Profile, related_name='profile')
     post = models.CharField(max_length=30)
     neighbourhood = models.ForeignKey(Neighbourhood, related_name='posts')
-
-class Category(models.Model):
-    name = models.CharField(max_length=30)
-
-    def save_category(self):
-        self.save()
-
-    def delete_category(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name           
+    category=models.CharField(max_length=30, null=True)
 
 # class Category(models.Model):
 #     name=models.CharField(max_length=50)    
+class Amenity(models.Model):
+   '''
+   To hold data on a neighbourhood's public amenities
+   '''
+
+   name = models.CharField(max_length=50)
+   phone = models.IntegerField()
+   email = models.EmailField()
+   amenity_type = models.CharField(max_length=50)
+   neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+
+   def __str__(self):
+      return self.name
+
+   class Meta:
+      verbose_name_plural = 'Amenities'
+
+class Comment(models.Model):
+   '''
+   Contain comments on posts
+   '''
+
+   comment = models.CharField(max_length=50)
+   post = models.ForeignKey(Post, on_delete=models.CASCADE)
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+   def __str__(self):
+      return self.comment

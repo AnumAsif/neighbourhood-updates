@@ -10,10 +10,10 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
-class EditForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio','profile_pic']
+        exclude = ['user','email']
 
 class HoodForm(forms.ModelForm):
     class Meta:
@@ -21,6 +21,15 @@ class HoodForm(forms.ModelForm):
         exclude = ['admin']
 
 class PostForm(forms.ModelForm):
+    CATEGORIES = (
+        ('', 'Select a Category'),
+        ('Event Alert','Alert'),
+        ('Meeting Announcement','Announcement'),
+        ('General','General'),
+       
+    )    
+    category = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
+
     class Meta:
         model = Post
         exclude = ['user', 'neighbourhood']
@@ -29,3 +38,22 @@ class BusinessForm(forms.ModelForm):
     class Meta:
             model = Business
             exclude = ['neighbourhood', 'user']
+
+class AmenityForm(forms.ModelForm):
+    CATEGORIES = (
+      ('', 'Select a Category'),
+      ('Hospital','Hospital'),
+      ('Police','Police'),
+      ('Park','Park'),
+      ('School','School'),
+      ('Fire Department', 'Fire Department')
+   )
+    amenity_type = forms.ChoiceField(choices=CATEGORIES,widget=forms.Select())
+    class Meta:
+      model = Amenity
+      fields = ['name','phone','email','amenity_type']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+      model = Comment
+      fields = ['comment']
