@@ -22,7 +22,19 @@
                     <input type="submit" class="btn btn-default" value="Add Post">
                 </form>
             </div>
-            
+            <div class="amenities">
+                {% for amenity in amenities %}
+                <div class="business-card">
+                    <div class="card-body">
+                        <h3>{{amenity.name}}</h3> 
+                        <p>Contact No: {{amenity.phone}}</p>
+                        <p>Email: {{amenity.email}}</p>
+                        <p>Type: {{amenity.amenity_type}}</p>
+                    </div>
+                </div>   
+                {% endfor %}
+            </div>
+
         </div>
         <div class="col-md-7 middle">
             <div class="row">
@@ -53,7 +65,7 @@
                 </div>
             </div>
             {% endfor %}
-            <button class="btn btn-default add-busins-btn"><a href="">Add a business</a></button>
+            <button class="btn btn-default add-busins-btn"><a href="{% url 'add_business' hood.id %}">Add a business</a></button>
     
         </div>
     </div>

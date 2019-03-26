@@ -35,9 +35,16 @@ class PostForm(forms.ModelForm):
         exclude = ['user', 'neighbourhood']
 
 class BusinessForm(forms.ModelForm):
+     
     class Meta:
             model = Business
-            exclude = ['neighbourhood', 'user']
+            fields=('name','phone','email','category')
+            widgets={
+                'name':forms.TextInput(attrs={'placeholder':'Enter Business Title'}) ,
+                'phone':forms.TextInput(attrs={'placeholder':'Enter Contact Detail'}),
+                'email':forms.TextInput(attrs={'placeholder':'Enter Email Address of business'}),
+                # 'category':forms.Select(attrs={'placeholder':'Select Category'}),
+            }
 
 class AmenityForm(forms.ModelForm):
     CATEGORIES = (

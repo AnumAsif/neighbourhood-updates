@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^edit/',views.edit_profile, name='edit_profile'),
     url(r'^add_neighbourhood/$', views.add_neighbourhood, name="add_neighbourhood"),
     url(r'^neighbourhood/(?P<hood_id>\d+)', views.hood_details, name = 'hood_details'),
+    url(r'^add_business/(?P<hood_id>\d+)', views.add_business, name="add_business"),
 
 ] 
 if settings.DEBUG:

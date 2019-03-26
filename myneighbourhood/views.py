@@ -100,6 +100,8 @@ def hood_details(request, hood_id):
     occupants=Profile.objects.filter(neighbourhood=hood)
     businesses=Business.objects.filter(neighbourhood=hood)
     posts=Post.objects.filter(neighbourhood=hood)
+    amenities=Amenity.objects.filter(neighbourhood=hood)
+
     current_user=request.user
     if request.method=='POST':
         form= PostForm(request.POST)
@@ -111,4 +113,20 @@ def hood_details(request, hood_id):
             return redirect('hood_details', hood_id=hood_id)
     else:
         form=PostForm()        
-    return render(request, 'hood_details.html',{'hood':hood,'occupants':occupants, 'businesses':businesses,'posts':posts,'form':form})
+    return render(request, 'hood_details.html',{'amenities':amenities,'hood':hood,'occupants':occupants, 'businesses':businesses,'posts':posts,'form':form})
+
+@login_required(login_url='/login')
+def add_business(request, hood_id):
+    user=request.user
+    hood=Neighbourhood.find_neighbourhood(hood_id)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.owner = user
+            business.neighbourhood=hood
+            business.save()
+            return redirect('hood_details', hood_id=hood_id)        
+    else:
+        form=BusinessForm()
+    return render(request,'add_business.html',{'form':form})    
