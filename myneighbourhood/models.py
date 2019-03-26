@@ -103,7 +103,7 @@ class Business(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     phone=models.IntegerField(null=True)
     def __str__(self):
-        return self.title
+        return self.name
 
 
     class Meta:
@@ -133,10 +133,10 @@ class Business(models.Model):
 
 class Post(models.Model):
     user = models.ForeignKey(Profile, related_name='profile')
-    post = models.CharField(max_length=30)
-    neighbourhood = models.ForeignKey(Neighbourhood, related_name='posts')
     category=models.CharField(max_length=30, null=True)
-
+    post = models.CharField(max_length=100)
+    neighbourhood = models.ForeignKey(Neighbourhood, related_name='posts')
+   
 # class Category(models.Model):
 #     name=models.CharField(max_length=50)    
 class Amenity(models.Model):

@@ -100,4 +100,15 @@ def hood_details(request, hood_id):
     occupants=Profile.objects.filter(neighbourhood=hood)
     businesses=Business.objects.filter(neighbourhood=hood)
     posts=Post.objects.filter(neighbourhood=hood)
-    return render(request, 'hood_details.html',{'hood':hood,'occupants':occupants, 'businesses':businesses,'posts':posts})
+    current_user=request.user
+    if request.method=='POST':
+        form= PostForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.user=current_user.profile
+            post.neighbourhood=hood
+            post.save()
+            return redirect('hood_details', hood_id=hood_id)
+    else:
+        form=PostForm()        
+    return render(request, 'hood_details.html',{'hood':hood,'occupants':occupants, 'businesses':businesses,'posts':posts,'form':form})
