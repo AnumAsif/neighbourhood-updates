@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="search-results">
+                <p>{{businesses.count}} results have been found for the searched term</p> 
+            </div>
+            {% for business in businesses %}
+            <div class="business-card">
+                <div class="card-body">
+                    <h3>{{business.name}}</h3> 
+                    <h4>Owner: {{business.owner}}</h4> 
+                    <p>Contact N0: {{business.phone}}</p>
+                    <p>Email: {{business.email}}</p>
+                    <p>Category: {{business.category.name}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock  %}

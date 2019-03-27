@@ -66,6 +66,10 @@ h1{
     padding:0;
     text-align:left;
 }
+.search-results{
+    font-size:20px;
+    text-align:center;
+}
 .profile-image{
     margin:0 auto;
     text-align: right;

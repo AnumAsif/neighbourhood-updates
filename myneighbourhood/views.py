@@ -130,3 +130,19 @@ def add_business(request, hood_id):
     else:
         form=BusinessForm()
     return render(request,'add_business.html',{'form':form})    
+
+@login_required(login_url='/login')
+def search(request):
+    current_user=request.user
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        businesses=Business.objects.filter(name__icontains = search_term)
+        message=f'{search_term}'
+
+        return render(request, 'search-page.html', {'message':message, 'businesses':businesses, 'current_user':current_user})
+
+    else:
+        message='Enter term to search'
+        return render(request, 'hood_details.html',{'amenities':amenities,'hood':hood,'occupants':occupants, 'businesses':businesses,'posts':posts,'form':form, 'message':message})
+
+    
