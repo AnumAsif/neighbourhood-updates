@@ -40,6 +40,19 @@ body{
 .business-btn a:hover{
     background-color: #F49D6E;
 }
+.occupants{
+    list-style: none;
+   
+
+}
+.occupants li a{
+    text-decoration: none;
+    color:black;
+    font-size: 20px;
+}
+.occupants li a:hover{
+    color:#A40E4C;
+}
 h1{
     text-align: center;
     font-size:30px;

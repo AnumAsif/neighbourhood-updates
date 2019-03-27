@@ -24,13 +24,13 @@
             <div class="row">
                 <h1 style="text-align:left;"><span>{{hood.name}}</span></h1>
                 <h3><span>Location: </span>{{hood.location}}</h3>
-                {% if current_user.profile in occupants %}
-                <ul>
+                <h3><span>Occupants</span></h3>
+                <ul class="occupants">
                      {% for occupant in occupants %}
                      <li><a href="{% url 'profile' occupant.user.username%}">{{occupant.user.username}}</a></li>
                      {% endfor %}     
                 </ul>     
-                {% endif %}
+             
                 <div class="add-post">
                      <h3>Add Post</h3>
                       <form action="" method="POST" enctype="multipart/form-data">
