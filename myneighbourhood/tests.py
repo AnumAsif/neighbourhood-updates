@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile, Location, Neighbourhood, Business
+from .models import Profile, Location, Neighbourhood, Business, Category
 from django.db import models
 # Create your tests here.
 class ProfileTestCase(TestCase):
@@ -78,8 +78,45 @@ class BusinessTestCase(TestCase):
     def test_instance(self):
         self.assertTrue(isinstance(self.business, Business)) 
 
-    def test_save_busioness(self):
+    def test_save_business(self):
         self.business.save_business()
         business=Business.objects.all()
         self.assertTrue(len(business)>0)
     
+class CategoryTestCase(TestCase):
+    def setUp(self):
+        self.category=Category.objects.create(name="Food")
+
+    def tearDown(self):
+        self.category.delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.category,Category))
+
+    def test_save_category(self):
+        self.category.save_category()
+        category=Category.objects.all()
+        self.assertTrue(len(category)>0)
+
+    def test_delete_category(self):
+        self.category.save_category()
+        category=Category.objects.filter(id=self.category.id).first()
+        category.delete_category()
+        category=Category.objects.all()
+        self.assertTrue(len(category)==0)
+
+
+class LocationTestCase(TestCase):
+    def setUp(self):
+        self.location=Location.objects.create(name="Nairobi")
+
+    def tearDown(self):
+        self.location.delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.location,Location))
+
+    def test_save_location(self):
+        self.location.save_location()
+        location=Location.objects.all()
+        self.assertTrue(len(location)>0)

@@ -27,6 +27,19 @@ body{
     margin-top:20vh;
     
 }
+.business-btn{
+    background-color: #A40E4C; 
+    border-radius: 20px;
+   
+}
+.business-btn a{
+    font-size: 20px;
+    color:#F5D6BA;
+    text-decoration: none;
+}
+.business-btn a:hover{
+    background-color: #F49D6E;
+}
 h1{
     text-align: center;
     font-size:30px;
@@ -67,13 +80,20 @@ span{
 .home a:hover{
     color:#2C2C54;
 }
-.business-card, .post-card{
+.business-card, .post-card, .amenity-card{
     margin:0 auto;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 60%;
     margin-top:8px;
 
+}
+.amenity-card{
+    width:80%;
+}
+
+h3{
+    font-weight: bold;
 }
 .control-label{
     display:none;
