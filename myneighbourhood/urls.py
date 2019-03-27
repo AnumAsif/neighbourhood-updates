@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^add_neighbourhood/$', views.add_neighbourhood, name="add_neighbourhood"),
     url(r'^neighbourhood/(?P<hood_id>\d+)', views.hood_details, name = 'hood_details'),
     url(r'^add_business/(?P<hood_id>\d+)', views.add_business, name="add_business"),
-    url(r'^search/', views.search, name="search"),
+    url(r'^search/(?P<hood_id>\d+)', views.search, name="search"),
 
 ] 
 if settings.DEBUG:

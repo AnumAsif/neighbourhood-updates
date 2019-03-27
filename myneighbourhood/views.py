@@ -132,11 +132,12 @@ def add_business(request, hood_id):
     return render(request,'add_business.html',{'form':form})    
 
 @login_required(login_url='/login')
-def search(request):
+def search(request, hood_id):
     current_user=request.user
+    hood=Neighbourhood.find_neighbourhood(hood_id)
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search')
-        businesses=Business.objects.filter(name__icontains = search_term)
+        businesses=Business.objects.filter(name__icontains = search_term , neighbourhood=hood)
         message=f'{search_term}'
 
         return render(request, 'search-page.html', {'message':message, 'businesses':businesses, 'current_user':current_user})
